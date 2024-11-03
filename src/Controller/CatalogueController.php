@@ -16,6 +16,9 @@ class CatalogueController extends AbstractController
         ]);
     }
 
+    /**
+     * Fonction permettant d'afficher un seul article du catalogue
+     */
     #[Route('/catalogue/12', name: 'catalogue_show')]
     public function show() {
         return $this->render('catalogue/show.html.twig');
