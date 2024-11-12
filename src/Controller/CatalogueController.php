@@ -12,7 +12,7 @@ class CatalogueController extends AbstractController
     public function index(): Response
     {
         return $this->render('catalogue/index.html.twig', [
-            'controller_name' => 'CatalogueController',
+            'current_menu' => 'CatalogueController',
         ]);
     }
 

@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Site garage{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="aside-left col-lg-3">
+            <!-- La deuxième partie uk-switcher en position absolute -->
+        </div>
+        <div class="aside-right col-lg-9">
+            <div class="row">
+                <ul uk-switcher>
+                    <li><a href="#">
+                            <div class="image-container">
+                                <img src="{{ asset('img/local/voiture1.jpg') }}" alt="voiture1">
+                                <div class="overlay">
+                                    <div class="text">Listes des véhicules</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li><a href="#">
+                            <div class="image-container">
+                                <img src="{{ asset('img/local/voiture2.jpg') }}" alt="voiture2">
+                                <div class="overlay">
+                                    <div class="text">Nos services</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <li><a href="#">
+                            <div class="image-container">
+                                <img src="{{ asset('img/local/voiture3.jpg') }}" alt="voiture3">
+                                <div class="overlay">
+                                    <div class="text">À propos</div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+                <div class="uk-switcher uk-margin">
+                    <div class="truc">
+                        <h1>Liste de véhicules</h1>
+                        <p>Vous avez la possibilité de consulter notre catalogue de toute la flotte de véhicules
+                        </p>
+                        <button onclick="window.location.href = 'catalogue.php'">Cliquez Ici</button>
+                    </div>
+                    <div class="truc">
+                        <h1>Nos services</h1>
+                        <p>Découvrez une expérience de location de voitures sans tracas avec notre gamme complète de
+                            services personnalisés. Que vous ayez besoin d'un véhicule pour une journée ou pour une
+                            longue escapade, nous avons ce qu'il vous faut. </br>Profitez de notre flotte
+                            diversifiée
+                            comprenant des voitures économiques, des berlines de luxe, des SUV spacieux et bien plus
+                            encore. </br>Nous offrons la livraison et le ramassage à des endroits pratiques, une
+                            assurance complète pour votre tranquillité d'esprit, une assistance routière 24/7 et des
+                            réservations en ligne simples et rapides. Ajoutez des extras comme des sièges auto ou
+                            des GPS à votre réservation pour une expérience sur mesure. Chez nous, la satisfaction
+                            du client est notre priorité, alors contactez-nous dès aujourd'hui pour réserver votre
+                            prochaine voiture de location.
+                        </p>
+                    </div>
+                    <div class="truc">
+                        <h1>À propos</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore
+                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut
+                            aliquip ex ea commodo consequat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
