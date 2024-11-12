@@ -1,0 +1,58 @@
+/*-----------Accueil--------------*/
+.bloc {
+    height: 640px;
+    border-radius: 24px;
+    margin-right: 5px;
+}
+
+.image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 395px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    color: white;
+    font-size: 24px;
+}
+
+.image-container:hover .overlay {
+    opacity: 1;
+}
+
+.image-container img {
+    width: 395px;
+    height: 640px;
+    border-radius: 50px;
+}
+
+.truc {
+    position: absolute;
+    top: 260px;
+    left: 35px;
+    width: 25%;
+}
+
+.slideSearch img {
+    width: 135px;
+    height: 105px;
+}
+
+/*-------------Popup------------*/
+.modal-content {
+    background-color: rgb(128, 128, 128);
+}
