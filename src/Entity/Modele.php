@@ -18,7 +18,7 @@ class Modele
     #[ORM\Column(length: 50)]
     private ?string $nomModele = null;
 
-    #[ORM\ManyToOne(inversedBy: 'listeModeles')]
+    #[ORM\ManyToOne(inversedBy: 'modeles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Marque $marque = null;
 
@@ -73,7 +73,7 @@ class Modele
     public function addVehicule(Vehicule $vehicule): static
     {
         if (!$this->vehicules->contains($vehicule)) {
-            $this->vehicules->add($vehicule);
+            $this->vehicules ->add($vehicule);
             $vehicule->setModele($this);
         }
 

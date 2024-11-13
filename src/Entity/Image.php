@@ -16,7 +16,7 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $cheminImg = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(inversedBy: 'images')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Vehicule $vehicule = null;
 

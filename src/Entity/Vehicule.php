@@ -84,9 +84,9 @@ class Vehicule
 
     public function setDateRentree(\DateTimeInterface $dateRentree): static
     {
-        $this->dateRentree = $dateRentree;
+        $this->dateRentree = $dateRentree; // Correction ici
 
-        return $this;
+        return $this; // Cela doit rester inchangé
     }
 
     public function getChevauxFiscaux(): ?int

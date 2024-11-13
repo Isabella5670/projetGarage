@@ -15,44 +15,48 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/">Loccar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/inscription">Inscription</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/catalogue">Catalogue</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
-                        </div>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-sm-2" type="search" placeholder="Search">
-                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                </form>
+        <!-- HEADER -->
+        <header>
+            <nav class="navbar navbar-expand-lg" uk-sticky>
+                <div class="container-fluid">
+                    <a class="navbar-brand text-light" href="{{ path('home') }}">Garage</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.attributes.get('_route') == 'app_home' %}active text-secondary{% else %}text-light{% endif %}" 
+                                href="{{ path('app_home') }}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.attributes.get('_route') == 'app_catalogue' %}active text-secondary{% else %}text-light{% endif %}" 
+                                href="{{ path('app_catalogue') }}">Catalogue</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if app.request.attributes.get('_route') == 'app_inscription' %}active text-secondary{% else %}text-light{% endif %}" 
+                                href="{{ path('app_inscription') }}">Inscription</a>
+                            </li>
+                        </ul>
+
+                        <form class="d-flex">
+                            <input class="form-control me-sm-2" type="search" placeholder="Rechercher">
+                            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
             </nav>
+        </header>
+        
+        <!-- MAIN CONTENT -->
+        <div class="container my-5">
+            {% block body %}
+            <!-- Contenu de la page spécifique ici -->
+            {% endblock %}
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center">
             <div class="container">
                 {% block body %}{% endblock %}
             </div>

@@ -1,0 +1,42 @@
+/*------------Général-------------*/
+body {
+    background-color: #1E1E1E;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: #3B51A4;
+    text-decoration: none;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+button,
+.btn {
+    background-color: #1E1E1E;
+    border: 1px solid white;
+    color: white;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 175px;
+    padding: 10px 5px;
+}
+
+button:hover,
+.btn:hover {
+    background-color: white;
+    color: #1E1E1E;
+}
+
+.container {
+    margin-top: 50px;
+    max-width: 1700px;
+}
