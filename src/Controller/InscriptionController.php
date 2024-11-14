@@ -15,9 +15,4 @@ class InscriptionController extends AbstractController
             'controller_name' => 'InscriptionController',
         ]);
     }
-
-    #[Route('/', name: 'home')]
-    public function home() {
-        return $this->render('inscription/home.html.twig');
-    }
 }
