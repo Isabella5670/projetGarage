@@ -1,40 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CatalogueController!{% endblock %}
+{% block title %}Catalogue{% endblock %}
 
 {% block body %}
     <h1 class="pb-4">Catalogue</h1>
     <section class="articles">
-        {% set articles = [
-            {'title': 'Titre 1', 'image': 'http://placehold.it/350x150', 'content': 'Description 1'},
-            {'title': 'Titre 2', 'image': 'http://placehold.it/350x150', 'content': 'Description 2'},
-            {'title': 'Titre 3', 'image': 'http://placehold.it/350x150', 'content': 'Description 3'},
-            {'title': 'Titre 4', 'image': 'http://placehold.it/350x150', 'content': 'Description 4'},
-            {'title': 'Titre 5', 'image': 'http://placehold.it/350x150', 'content': 'Description 5'},
-            {'title': 'Titre 6', 'image': 'http://placehold.it/350x150', 'content': 'Description 6'},
-            {'title': 'Titre 7', 'image': 'http://placehold.it/350x150', 'content': 'Description 7'},
-            {'title': 'Titre 8', 'image': 'http://placehold.it/350x150', 'content': 'Description 8'}
-        ] %}
+        {% if vehicules is empty %}
+            <p>Aucun véhicule disponible.</p>
+        {% else %}
+            {% for i in 0..(vehicules|length - 1) %}
+                {% if i % 4 == 0 %}
+                    <ul class="list-group list-group-horizontal pb-4">
+                {% endif %}
 
-        {% for i in 0..(articles|length - 1) %}
-            {% if i % 4 == 0 %}
-                <ul class="list-group list-group-horizontal pb-4">
-            {% endif %}
+                <li class="list-group-item">
+                    <article>
+                        <h2>{{ vehicules[i].modele.nomModele }} - {{ vehicules[i].modele.marque.nomMarque }}</h2>
 
-            <li class="list-group-item">
-                <article>
-                    <h2>{{ articles[i].title }}</h2>
-                    <div class="content">
-                        <img src="{{ articles[i].image }}" alt="{{ articles[i].title }}">
-                        <p>{{ articles[i].content }}</p>
-                        <a href="{{ path('catalogue_show') }}" class="btn btn-primary">Lire la suite</a>
-                    </div>
-                </article>
-            </li>
+                        <div id="carouselExample{{ i }}" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% if vehicules[i].images|length > 0 %}
+                                    {% for image in vehicules[i].images %}
+                                        <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                                            <img src="{{ image.cheminImg }}" class="d-block w-100" alt="{{ vehicules[i].immatriculation }}">
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="carousel-item active">
+                                        <img src="http:// placehold.it/350x150" class="d-block w-100" alt="{{ vehicules[i].immatriculation }}">
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExample{{ i }}" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Précédent</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExample{{ i }}" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Suivant</span>
+                            </a>
+                        </div>
 
-            {% if i % 4 == 3 or i == articles|length - 1 %}
-                </ul>
-            {% endif %}
-        {% endfor %}
+                        <p class="mt-2"><strong>Prix:</strong> {{ vehicules[i].prix }} €</p>
+                        <p><strong>Description:</strong> {{ vehicules[i].description is defined ? vehicules[i].description : 'Description non disponible' }}</p>
+                        <a href="{{ path('catalogue_show', { 'id': vehicules[i].id }) }}" class="btn btn-primary">Lire la suite</a>
+                    </article>
+                </li>
+
+                {% if i % 4 == 3 or i == vehicules|length - 1 %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}
