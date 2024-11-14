@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Site garage{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
+<section id="main-content" class="container">
     <div class="row">
         <div class="aside-left col-lg-3">
             <!-- La deuxième partie uk-switcher en position absolute -->
@@ -12,7 +13,7 @@
                 <ul uk-switcher>
                     <li><a href="#">
                             <div class="image-container">
-                                <img src="{{ asset('img/local/voiture1.jpg') }}" alt="voiture1">
+                                <img src="img/local/voiture1.jpg" alt="voiture1">
                                 <div class="overlay">
                                     <div class="text">Listes des véhicules</div>
                                 </div>
@@ -21,7 +22,7 @@
                     </li>
                     <li><a href="#">
                             <div class="image-container">
-                                <img src="{{ asset('img/local/voiture2.jpg') }}" alt="voiture2">
+                                <img src="img/local/voiture2.jpg" alt="voiture2">
                                 <div class="overlay">
                                     <div class="text">Nos services</div>
                                 </div>
@@ -30,7 +31,7 @@
                     </li>
                     <li><a href="#">
                             <div class="image-container">
-                                <img src="{{ asset('img/local/voiture3.jpg') }}" alt="voiture3">
+                                <img src="img/local/voiture3.jpg" alt="voiture3">
                                 <div class="overlay">
                                     <div class="text">À propos</div>
                                 </div>
@@ -73,4 +74,5 @@
             </div>
         </div>
     </div>
+</section>
 {% endblock %}

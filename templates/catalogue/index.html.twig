@@ -3,30 +3,54 @@
 {% block title %}Catalogue{% endblock %}
 
 {% block body %}
+    <h1 class="pb-4">Catalogue</h1>
     <section class="articles">
-        <articles>
-            <h2>Titre de l'article</h2>
-            <div class="content">
-                <img src="http://placehold.it/350x150" alt="">
-                <p>Voici les informations concernant la voiture</p>
-                <a href="{{ path('catalogue_show') }}" class="btn btn-primary">Lire la suite</a>
-            </div>
-        </articles>
-        <articles>
-            <h2>Titre de l'article</h2>
-            <div class="content">
-                <img src="http://placehold.it/350x150" alt="">
-                <p>Voici les informations concernant la voiture</p>
-                <a href="{{ path('catalogue_show') }}" class="btn btn-primary">Lire la suite</a>
-            </div>
-        </articles>
-        <articles>
-            <h2>Titre de l'article</h2>
-            <div class="content">
-                <img src="http://placehold.it/350x150" alt="">
-                <p>Voici les informations concernant la voiture</p>
-                <a href="{{ path('catalogue_show') }}" class="btn btn-primary">Lire la suite</a>
-            </div>
-        </articles>
+        {% if vehicules is empty %}
+            <p>Aucun véhicule disponible.</p>
+        {% else %}
+            {% for i in 0..(vehicules|length - 1) %}
+                {% if i % 4 == 0 %}
+                    <ul class="list-group list-group-horizontal pb-4">
+                {% endif %}
+
+                <li class="list-group-item">
+                    <article>
+                        <h2>{{ vehicules[i].modele.nomModele }} - {{ vehicules[i].modele.marque.nomMarque }}</h2>
+
+                        <div id="carouselExample{{ i }}" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% if vehicules[i].images|length > 0 %}
+                                    {% for image in vehicules[i].images %}
+                                        <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                                            <img src="{{ image.cheminImg }}" class="d-block w-100" alt="{{ vehicules[i].immatriculation }}">
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="carousel-item active">
+                                        <img src="http:// placehold.it/350x150" class="d-block w-100" alt="{{ vehicules[i].immatriculation }}">
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExample{{ i }}" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Précédent</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExample{{ i }}" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Suivant</span>
+                            </a>
+                        </div>
+
+                        <p class="mt-2"><strong>Prix:</strong> {{ vehicules[i].prix }} €</p>
+                        <p><strong>Description:</strong> {{ vehicules[i].description is defined ? vehicules[i].description : 'Description non disponible' }}</p>
+                        <a href="{{ path('catalogue_show', { 'id': vehicules[i].id }) }}" class="btn btn-primary">Lire la suite</a>
+                    </article>
+                </li>
+
+                {% if i % 4 == 3 or i == vehicules|length - 1 %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
     </section>
 {% endblock %}

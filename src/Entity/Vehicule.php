@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\VehiculeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 #[ORM\Entity(repositoryClass: VehiculeRepository::class)]
 class Vehicule
@@ -35,6 +37,17 @@ class Vehicule
     #[ORM\ManyToOne(inversedBy: 'vehicules')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Modele $modele = null;
+
+    /**
+     * @var Collection<int, Image>
+     */
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'vehicule', orphanRemoval: true)]
+    private Collection $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -121,6 +134,36 @@ class Vehicule
     public function setModele(?Modele $modele): static
     {
         $this->modele = $modele;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setVehicule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getVehicule() === $this) {
+                $image->setVehicule(null);
+            }
+        }
 
         return $this;
     }

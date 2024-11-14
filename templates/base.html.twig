@@ -2,6 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        
         <title>{% block title %}Locavoiture{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         
@@ -21,6 +22,8 @@
         <link rel="stylesheet" href="{{ asset('css/profils.css') }}">
         <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -32,56 +35,57 @@
     <body>
         <!-- HEADER -->
         <header>
-            <nav class="navbar navbar-expand-lg" uk-sticky>
-                <div class="container-fluid">
-                    <a class="navbar-brand text-light" href="{{ path('home') }}">Garage</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarColor01">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link {% if app.request.attributes.get('_route') == 'app_home' %}active text-secondary{% else %}text-light{% endif %}" 
-                                href="{{ path('app_home') }}">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% if app.request.attributes.get('_route') == 'app_catalogue' %}active text-secondary{% else %}text-light{% endif %}" 
-                                href="{{ path('app_catalogue') }}">Catalogue</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link {% if app.request.attributes.get('_route') == 'app_inscription' %}active text-secondary{% else %}text-light{% endif %}" 
-                                href="{{ path('app_inscription') }}">Inscription</a>
-                            </li>
-                        </ul>
-
-                        <form class="d-flex">
-                            <input class="form-control me-sm-2" type="search" placeholder="Rechercher">
-                            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Rechercher</button>
-                        </form>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        
-        <!-- MAIN CONTENT -->
-        <div class="container my-5">
-            {% block body %}
-            <!-- Contenu de la page spécifique ici -->
-            {% endblock %}
-        </div>
-
-        <!-- FOOTER -->
-        <footer class="text-center">
-            <div class="container">
-                <p>&copy; 2024 - New Caledonia</p>
-                <a href="#">Mentions légales</a> | <a href="#">Politique de confidentialité</a>
+        <nav uk-sticky>
+            <div>
+                <a class="nav-link {% if app.request.attributes.get('_route') == 'app_home' %}active text-secondary{% else %}text-light{% endif %}" 
+                    href="{{ path('app_home') }}"><img src="img/local/logo.png" alt="logo">
+                </a>
             </div>
-        </footer>
+            <div style="align-items: center;">
+                <nav>
+                    <ul>
+                        <li>
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'app_home' %}active text-secondary{% else %}text-light{% endif %}" 
+                                href="{{ path('app_home') }}">Home</a>
+                        </li>
+                        <li>
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'app_catalogue' %}active text-secondary{% else %}text-light{% endif %}" 
+                                href="{{ path('app_catalogue') }}">Catalogue</a>
+                        </li>
+                        <li>
+                            <a class="nav-link {% if app.request.attributes.get('_route') == 'app_inscription' %}active text-secondary{% else %}text-light{% endif %}" 
+                                href="{{ path('app_inscription') }}">Inscription</a>
+                        </li>
+                        <form action="rechercher.php" method="POST" class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" name="critere" id="critere" required>
+                            <input type="submit" value="Rechercher">
+                        </form>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </header>
+        
+    <!-- MAIN CONTENT -->
+    <div class="container my-5">
+        {% block body %}
+        <!-- Contenu de la page spécifique ici -->
+        {% endblock %}
+    </div>
 
-        <!-- JavaScript Libraries -->
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-        <script src="{{ asset('js/uikit.min.js') }}"></script>
-        <script src="{{ asset('js/uikit-icons.min.js') }}"></script>
+    <!-- FOOTER -->
+    <hr class="container">
+    <footer>
+        <div>
+            <a href="#"> © 2024 - New Caledonia</a>
+        </div>
+        <div>
+            <a href="#">Mentions légales</a>
+        </div>
+        <div>
+            <a href="#">Politique de confidentialité</a>
+        </div>
+    </footer>
+
     </body>
 </html>
