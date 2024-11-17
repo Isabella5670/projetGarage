@@ -1,0 +1,23 @@
+{# templates/voiture/detail.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Véhicule : {{ voiture.marque.nomMarque }} {{ voiture.modele.nomModele }}{% endblock %}
+
+{% block body %}
+    <h1>{{ voiture.modele.nomModele }} - {{ voiture.marque.nomMarque }}</h1>
+    <p>Immatriculation: {{ voiture.immatriculation }}</p>
+    <p>Prix: {{ voiture.prix | number_format(2, ',', ' ') }} CFP</p>
+    <p>Date de mise en circulation: {{ voiture.dateMiseEnCirculation|date('d/m/Y') }}</p>
+    <p>Date de retour au garage: {{ voiture.dateRentreGarage|date('d/m/Y') }}</p>
+    <p>Nombre de places: {{ voiture.nbPlaces }}</p>
+    <p>Type de boîte de vitesses: {{ voiture.typeBoiteVitesse }}</p>
+    
+    <h3>Images</h3>
+    <div class="images">
+        {% for image in voiture.images %}
+            <img src="{{ asset(image.chemin) }}" alt="{{ image.nomImage }}" />
+        {% endfor %}
+    </div>
+    
+    <a href="{{ path('app_voiture') }}">Retour au catalogue</a>
+{% endblock %}

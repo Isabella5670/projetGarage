@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le véhicule{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1>{{ form.vars.value.id ? 'Modifier' : 'Ajouter' }} une voiture</h1>
+
+        {{ form_start(form, { 'attr': { 'enctype': 'multipart/form-data', 'class': 'form' } }) }}
+        
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_label(form.immatriculation) }}
+                {{ form_widget(form.immatriculation, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.immatriculation) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.prix) }}
+                {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.prix) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.nbPlaces) }}
+                {{ form_widget(form.nbPlaces, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nbPlaces) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.typeBoiteVitesse) }}
+                {{ form_widget(form.typeBoiteVitesse, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(form.typeBoiteVitesse) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                {{ form_label(form.marque) }}
+                {{ form_widget(form.marque, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(form.marque) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.nouvelleMarque) }}
+                {{ form_widget(form.nouvelleMarque, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nouvelleMarque) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.modele) }}
+                {{ form_widget(form.modele, {'attr': {'class': 'form-select'}}) }}
+                {{ form_errors(form.modele) }}
+            </div>
+            <div class="col-md-3">
+                {{ form_label(form.nouveauModele) }}
+                {{ form_widget(form.nouveauModele, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.nouveauModele) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_label(form.dateMiseEnCirculation) }}
+                {{ form_widget(form.dateMiseEnCirculation, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.dateMiseEnCirculation) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_label(form.dateRentreGarage) }}
+                {{ form_widget(form.dateRentreGarage, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.dateRentreGarage) }}
+            </div>
+        </div>
+        <div class="mb-3">
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.description) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.imageFiles) }}
+            {{ form_widget(form.imageFiles, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.imageFiles) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

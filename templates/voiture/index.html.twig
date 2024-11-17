@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block body %}
+    <h1 class="pb-4">Catalogue</h1>
+    <section class="articles">
+        {% if voitures is empty %}
+            <p>Aucun véhicule disponible.</p>
+        {% else %}
+            {% for i in 0..(voitures|length - 1) %}
+                {% if i % 4 == 0 %}
+                    <ul class="list-group list-group-horizontal pb-4">
+                {% endif %}
+
+                <li class="list-group-item">
+                    <article>
+                        <h2>{{ voitures[i].modele.nomModele }} - {{ voitures[i].modele.marque.nomMarque }}</h2>
+
+                        <div id="carouselExample{{ i }}" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% if voitures[i].images|length > 0 %}
+                                    {% for image in voitures[i].images %}
+                                        <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                                            <img src="{{ asset(image.chemin) }}" class="d-block w-100" alt="{{ voitures[i].modele.nomModele }}">
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="carousel-item active">
+                                        <img src="http://placehold.it/350x150" class="d-block w-100" alt="{{ voitures[i].immatriculation }}">
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExample{{ i }}" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Précédent</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExample{{ i }}" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Suivant</span>
+                            </a>
+                        </div>
+
+                        <p class="mt-2"><strong>Prix:</strong> {{ voitures[i].prix | number_format(2, ',', ' ') }} €</p>
+                        <p><strong>Description:</strong> {{ voitures[i].description is defined ? voitures[i].description : 'Aucune description' }}</p>
+                        <a href="{{ path('voiture_detail', { 'id': voitures[i].id }) }}" class="btn btn-primary">Lire la suite</a>
+                    </article>
+                </li>
+
+                {% if i % 4 == 3 or i == voitures|length - 1 %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </section>
+{% endblock %}

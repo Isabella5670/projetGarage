@@ -21,7 +21,7 @@ class Marque
     /**
      * @var Collection<int, Modele>
      */
-    #[ORM\OneToMany(targetEntity: Modele::class, mappedBy: 'marque', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Modele::class, mappedBy: 'marque')]
     private Collection $modeles;
 
     public function __construct()

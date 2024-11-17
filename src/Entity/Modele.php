@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ModeleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ModeleRepository::class)]
@@ -21,17 +19,6 @@ class Modele
     #[ORM\ManyToOne(inversedBy: 'modeles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Marque $marque = null;
-
-    /**
-     * @var Collection<int, Vehicule>
-     */
-    #[ORM\OneToMany(targetEntity: Vehicule::class, mappedBy: 'modele')]
-    private Collection $vehicules;
-
-    public function __construct()
-    {
-        $this->vehicules = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -58,36 +45,6 @@ class Modele
     public function setMarque(?Marque $marque): static
     {
         $this->marque = $marque;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Vehicule>
-     */
-    public function getVehicules(): Collection
-    {
-        return $this->vehicules;
-    }
-
-    public function addVehicule(Vehicule $vehicule): static
-    {
-        if (!$this->vehicules->contains($vehicule)) {
-            $this->vehicules ->add($vehicule);
-            $vehicule->setModele($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVehicule(Vehicule $vehicule): static
-    {
-        if ($this->vehicules->removeElement($vehicule)) {
-            // set the owning side to null (unless already changed)
-            if ($vehicule->getModele() === $this) {
-                $vehicule->setModele(null);
-            }
-        }
 
         return $this;
     }

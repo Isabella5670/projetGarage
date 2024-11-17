@@ -1,8 +1,5 @@
 /*------------Général-------------*/
-body {
-    background-color: #1E1E1E;
-    color: white;
-}
+
 
 a {
     text-decoration: none;
@@ -39,4 +36,20 @@ button:hover,
 .container {
     margin-top: 50px;
     max-width: 1700px;
+}
+
+/* Appliquer une hauteur de 100% à la page pour couvrir tout l'écran */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background-color: #1E1E1E;
+    color: white;
+}
+
+/* Si vous souhaitez centrer le contenu, vous pouvez l'ajouter ici */
+.main-container {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
 }
